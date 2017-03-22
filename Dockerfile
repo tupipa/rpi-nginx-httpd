@@ -1,5 +1,9 @@
 FROM resin/rpi-raspbian
-MAINTAINER Ludovic Roguet <code@fourteenislands.io>
+
+########################
+LABEL Description="Combine NGINX reverse proxy and httpd(Apache2 web server) into one Docker image for Raspberry Pi. The Dockerfile is based on: https://github.com/lroguet/rpi-nginx-proxy." \
+      Vendor="Lele Ma" \
+      Version="0.1"
 
 # Install wget and install/updates certificates
 RUN apt-get update \
@@ -37,3 +41,7 @@ VOLUME ["/etc/nginx/certs"]
 
 ENTRYPOINT ["/app/docker-entrypoint.sh"]
 CMD ["forego", "start", "-r"]
+
+RUN apt-get update && apt-get install apt-utils -y && apt-get install apache2 -y
+
+
