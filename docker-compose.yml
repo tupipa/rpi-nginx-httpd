@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+    niginx-httpd:
+        restart: on-failure:3
+        image: tupipa/rpi-nginx-httpd
+        container_name: my-nginx-httpd
+        ports:
+           - "80:80"
+           - "443:443"
+        volumes:
+           - /var/run/docker.sock:/tmp/docker.sock:ro
+           #- /your/nginx/configure_file:/etc/nginx/conf.d/configure_file
+           #- /your/web/site/html/path:/var/www/html:ro
+
