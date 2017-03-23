@@ -1,7 +1,8 @@
 FROM resin/rpi-raspbian
 
 ########################
-LABEL Description="Combine NGINX reverse proxy and httpd(Apache2 web server) into one Docker image for Raspberry Pi. The Dockerfile is based on: https://github.com/lroguet/rpi-nginx-proxy." \
+LABEL Description="Combine NGINX reverse proxy and httpd(Apache2 web server) into one Docker image for Raspberry Pi. \
+      The Dockerfile is based on: https://github.com/lroguet/rpi-nginx-proxy." \
       Vendor="Lele Ma" \
       Version="0.1"
 
@@ -11,7 +12,17 @@ RUN apt-get update \
     ca-certificates \
     git \
     mercurial \
+ && apt-get clean \
+ && rm -r /var/lib/apt/lists/*
+
+RUN apt-get update \
+ && apt-get install -y -q --no-install-recommends \
     golang \
+ && apt-get clean \
+ && rm -r /var/lib/apt/lists/*
+
+RUN apt-get update \
+ && apt-get install -y -q --no-install-recommends \
     nginx \
     wget \
  && apt-get clean \
