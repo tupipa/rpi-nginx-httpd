@@ -53,6 +53,11 @@ VOLUME ["/etc/nginx/certs"]
 ENTRYPOINT ["/app/docker-entrypoint.sh"]
 CMD ["forego", "start", "-r"]
 
-RUN apt-get update && apt-get install apt-utils -y && apt-get install apache2 -y
+RUN apt-get update \
+ && apt-get install apt-utils -y \
+ && apt-get install apache2 -y \
+ && apt-get clean \
+ && rm -r /var/lib/apt/lists/*
+
 
 
